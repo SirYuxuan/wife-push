@@ -33,7 +33,7 @@ public class MorningPush {
     /**
      * 程序启动初始化QQ机器人
      */
-    public  MorningPush() {
+    public MorningPush() {
         bot = BotFactory.INSTANCE.newBot(1718018032L, BotAuthorization.byQRCode(), configuration -> {
             configuration.setProtocol(BotConfiguration.MiraiProtocol.ANDROID_WATCH);
             configuration.fileBasedDeviceInfo();
@@ -84,19 +84,18 @@ public class MorningPush {
         StringBuilder result = new StringBuilder();
         result.append("老婆！起床啦☀\n");
         result.append("今天是").append(DateUtil.today()).append(" ").append(week).append("\n");
-        result.append("城市：").append("郑州\n");
         result.append("天气：").append(weather).append("\n");
-        result.append("风向：").append(windDirection).append("\n").append("风力：").append(windPower).append("\n");
-        result.append("最低气温：").append(min).append("\n");
-        result.append("最高气温：").append(max).append("\n");
-        result.append("日出时间：").append(sunrise).append("\n").append("日落时间：").append(sunset).append("\n");
+        result.append("风向：").append(windDirection).append("/").append(windPower).append("\n");
+        result.append("今日气温：").append(min).append("~").append(max).append("\n");
+        result.append("日出时间：").append(sunrise).append("~").append(sunset).append("\n");
         result.append("彩虹屁：").append(rainbowFart).append("\n");
-        result.append("今天是我们相恋的第").append(loveInterval).append("天\n");
-        result.append("距离小可爱生日还有").append(DateUtil.betweenDay(new Date(), DateUtil.parseDate("2024-02-222"), true)).append("天\n");
-        if(isLove){
+        result.append("今天是我们相恋的第").append(loveInterval).append("\n");
+        result.append("我们已经订婚").append(DateUtil.formatBetween(DateUtil.parseDate("2023-08-02"), new Date(), BetweenFormatter.Level.DAY)).append("\n");
+        result.append("距离小可爱生日还有").append(DateUtil.betweenDay(new Date(), DateUtil.parseDate("2024-02-22"), true)).append("天\n");
+        if (isLove) {
             result.append("今天是我们相恋").append(acquaintanceMonth).append("个月纪念日哦！\n");
         }
-        if(isCommemorate){
+        if (isCommemorate) {
             result.append("我们已经认识").append(acquaintanceMonth).append("个月啦！\n");
         }
         result.append("名言：").append(oneDay);
@@ -105,5 +104,42 @@ public class MorningPush {
         Objects.requireNonNull(bot.getFriend(1348517163L)).sendMessage(result.toString());
     }
 
+
+    @Scheduled(cron = "0 15 21 * * ?")
+    @PostConstruct
+    public void eveningPush() {
+
+        // 3.3 天气
+        JSONObject weatherData = Util.get7Weather().getJSONObject("result").getJSONArray("list").getJSONObject(1);
+        // 周几
+        String week = weatherData.getString("week");
+        // 天气
+        String weather = weatherData.getString("weather");
+        // 最低温度
+        String min = weatherData.getString("lowest");
+        // 最高温度
+        String max = weatherData.getString("highest");
+        // 风向
+        String windDirection = weatherData.getString("wind");
+        // 风力
+        String windPower = weatherData.getString("windsc");
+        // 日出时间
+        String sunrise = weatherData.getString("sunrise");
+        // 日落时间
+        String sunset = weatherData.getString("sunset");
+        String tips = weatherData.getString("tips");
+
+        Date toDay = new Date();
+
+        String result = "老婆！晚上好🌙\n" +
+                "明天是" + DateUtil.formatDate(DateUtil.offsetDay(toDay, 1)) + " " + week + "\n" +
+                "天气：" + weather + "\n" +
+                "风向：" + windDirection + "/" + windPower + "\n" +
+                "明日气温：" + min + "~" + max + "\n" +
+                "日出时间：" + sunrise + "~" + sunset + "\n" +
+                "友情提示：" + tips;
+
+        Objects.requireNonNull(bot.getFriend(1348517163L)).sendMessage(result);
+    }
 
 }
