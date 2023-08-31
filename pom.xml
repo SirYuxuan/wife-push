@@ -1,61 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Maven项目配置文件 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- 项目坐标 -->
     <groupId>com.yuxuan66</groupId>
     <artifactId>wifePush</artifactId>
     <version>1.0-SNAPSHOT</version>
     <parent>
+        <!-- Spring Boot 父项目依赖 -->
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.6</version>
         <relativePath/>
     </parent>
     <properties>
+        <!-- Java版本 -->
         <java.version>17</java.version>
+        <!-- 项目编码 -->
         <project.encoding>UTF-8</project.encoding>
+        <!-- Lombok版本 -->
+        <lombok.version>1.18.20</lombok.version>
+        <!-- Hutool版本 -->
+        <hutool-all.version>5.8.6</hutool-all.version>
+        <!-- Kotlin Coroutines版本 -->
+        <kotlinx-coroutines-core-jvm.version>1.6.4</kotlinx-coroutines-core-jvm.version>
+        <!-- Mirai版本 -->
+        <mirai-core-jvm.version>2.15.0</mirai-core-jvm.version>
+        <!-- Fastjson版本 -->
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
     <dependencies>
-        <!--微信模版消息推送三方sdk-->
+
+        <!-- Lombok依赖 -->
         <dependency>
-            <groupId>com.github.binarywang</groupId>
-            <artifactId>weixin-java-mp</artifactId>
-            <version>3.3.0</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
+        <!-- Hutool依赖 -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.8.6</version>
+            <version>${hutool-all.version}</version>
         </dependency>
+        <!-- Kotlin Coroutines依赖 -->
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-coroutines-core-jvm</artifactId>
-            <version>1.6.4</version>
+            <version>${kotlinx-coroutines-core-jvm.version}</version>
         </dependency>
+        <!-- Mirai依赖 -->
         <dependency>
             <groupId>net.mamoe</groupId>
             <artifactId>mirai-core-jvm</artifactId>
-            <version>2.15.0</version>
+            <version>${mirai-core-jvm.version}</version>
         </dependency>
+        <!-- Fastjson依赖 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.83</version>
+            <version>${fastjson.version}</version>
         </dependency>
+        <!-- Spring Boot核心依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+        <!-- Spring Boot Web依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
     <build>
+        <!-- 构建配置 -->
         <finalName>wifePush</finalName>
         <plugins>
+            <!-- Maven编译插件配置 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -65,6 +90,7 @@
                     <encoding>${project.encoding}</encoding>
                 </configuration>
             </plugin>
+            <!-- Spring Boot Maven插件配置 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

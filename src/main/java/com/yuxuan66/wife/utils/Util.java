@@ -2,6 +2,7 @@ package com.yuxuan66.wife.utils;
 
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * 获取推送需要的数据
@@ -14,7 +15,8 @@ public class Util {
      * 天行的密钥
      * <a href="https://www.tianapi.com/">天行数据</a>
      */
-        private static final String KEY = "85976a35a1e96afe45c1fadff69a159a";
+    @Value("${tianxing.key}")
+    private static final String KEY = "85976a35a1e96afe45c1fadff69a159a";
 
     /**
      * 获取每日一言的数据
@@ -36,13 +38,16 @@ public class Util {
 
     /**
      * 查询郑州的天气预报
+     *
      * @return 天气预报
      */
     public static JSONObject getWeather() {
         return JSONObject.parseObject(HttpUtil.get("https://apis.tianapi.com/tianqi/index?key=" + KEY + "&city=101180101&type=1"));
     }
+
     /**
      * 查询郑州的7天气预报
+     *
      * @return 天气预报
      */
     public static JSONObject get7Weather() {

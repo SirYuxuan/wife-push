@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
+ * 老婆推送项目启动类
  * @author Sir丶雨轩
  * @since 2023/07/04
  */

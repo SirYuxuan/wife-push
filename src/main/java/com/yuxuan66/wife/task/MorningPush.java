@@ -1,16 +1,11 @@
 package com.yuxuan66.wife.task;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.BetweenFormatter;
-import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.yuxuan66.wife.support.config.BotConfig;
 import com.yuxuan66.wife.utils.Util;
-import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
-import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
-import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
-import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.auth.BotAuthorization;
@@ -19,22 +14,35 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.awt.image.ConvolveOp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
 /**
+ * 早上推送消息给老婆信息
  * @author Sir丶雨轩
  * @since 2023/7/4
  */
 @Component
 public class MorningPush {
+
+    /**
+     * QQ机器人
+     */
     private final Bot bot;
+
+    /**
+     * QQ机器人配置
+     */
+    private final BotConfig botConfig;
 
     /**
      * 程序启动初始化QQ机器人
      */
-    public MorningPush() {
-        bot = BotFactory.INSTANCE.newBot(1718018032L, BotAuthorization.byQRCode(), configuration -> {
+    public MorningPush(BotConfig botConfig) {
+        this.botConfig = botConfig;
+        bot = BotFactory.INSTANCE.newBot(botConfig.getQq(), BotAuthorization.byQRCode(), configuration -> {
             configuration.setProtocol(BotConfiguration.MiraiProtocol.ANDROID_WATCH);
             configuration.fileBasedDeviceInfo();
         });
@@ -71,16 +79,23 @@ public class MorningPush {
         // 日落时间
         String sunset = weatherData.getString("sunset");
 
+        // 今天
         Date toDay = new Date();
-        // 3.4 生日计算
-        // 3.5 相恋日子计算
-        String loveInterval = DateUtil.formatBetween(DateUtil.parseDate("2023-05-11"), toDay, BetweenFormatter.Level.DAY);
-        // 3.6 每月认识纪念日 每月5号为认识纪念日 每月11号为相恋纪念日
-        boolean isCommemorate = DateUtil.dayOfMonth(toDay) == 5;
+        // 认识的日子
+        Date acquaintance = DateUtil.parseDate(botConfig.getAcquaintance());
+        // 相恋的日子
+        Date fallingInLove = DateUtil.parseDate(botConfig.getFallingInLove());
+        // 相恋多少天计算
+        String loveInterval = DateUtil.formatBetween(fallingInLove, toDay, BetweenFormatter.Level.DAY);
+
+        // 是否是认识的那一天
+        boolean isCommemorate = DateUtil.dayOfMonth(toDay) == DateUtil.dayOfMonth(acquaintance);
         // 表白的那一天
-        boolean isLove = DateUtil.dayOfMonth(toDay) == 11;
+        boolean isLove = DateUtil.dayOfMonth(toDay) == DateUtil.dayOfMonth(fallingInLove);
         // 已经认识几个月了/相恋几个月0
-        long acquaintanceMonth = DateUtil.betweenMonth(DateUtil.parseDate("2023-05-5"), toDay, true);
+        long acquaintanceMonth = DateUtil.betweenMonth(acquaintance, toDay, true);
+
+        // 拼接发送信息
         StringBuilder result = new StringBuilder();
         result.append("老婆！起床啦☀\n");
         result.append("今天是").append(DateUtil.today()).append(" ").append(week).append("\n");
@@ -90,18 +105,29 @@ public class MorningPush {
         result.append("日出时间：").append(sunrise).append("~").append(sunset).append("\n");
         result.append("彩虹屁：").append(rainbowFart).append("\n");
         result.append("今天是我们相恋的第").append(loveInterval).append("\n");
-        result.append("我们已经订婚").append(DateUtil.formatBetween(DateUtil.parseDate("2023-08-02"), new Date(), BetweenFormatter.Level.DAY)).append("\n");
-        result.append("距离小可爱生日还有").append(DateUtil.betweenDay(new Date(), DateUtil.parseDate("2024-02-22"), true)).append("天\n");
+        result.append("我们已经订婚").append(DateUtil.formatBetween(DateUtil.parseDate(botConfig.getEngagement()), new Date(), BetweenFormatter.Level.DAY)).append("\n");
+        result.append("距离小可爱生日还有").append(DateUtil.betweenDay(new Date(), DateUtil.parseDate(botConfig.getBirthday()), true)).append("天\n");
         if (isLove) {
             result.append("今天是我们相恋").append(acquaintanceMonth).append("个月纪念日哦！\n");
         }
         if (isCommemorate) {
             result.append("我们已经认识").append(acquaintanceMonth).append("个月啦！\n");
         }
+
+        // 开始计算领证的日子
+        int numberOfDaysForCertificateAcquisition = Convert.toInt(DateUtil.formatBetween(DateUtil.parseDate(botConfig.getObtainingACertificate()), new Date(), BetweenFormatter.Level.DAY));
+        if(numberOfDaysForCertificateAcquisition == 0){
+            result.append("今天是我们领证的日子哦！\n");
+        }else if(numberOfDaysForCertificateAcquisition > 0){
+            result.append("距离我们领证还有").append(numberOfDaysForCertificateAcquisition).append("天哦！\n");
+        }else {
+            result.append("我们已经领证").append(Math.abs(numberOfDaysForCertificateAcquisition)).append("天啦！\n");
+        }
+
         result.append("名言：").append(oneDay);
 
 
-        Objects.requireNonNull(bot.getFriend(1348517163L)).sendMessage(result.toString());
+        Objects.requireNonNull(bot.getFriend(botConfig.getWifeQQ())).sendMessage(result.toString());
     }
 
 
@@ -139,7 +165,7 @@ public class MorningPush {
                 "日出时间：" + sunrise + "~" + sunset + "\n" +
                 "友情提示：" + tips;
 
-        Objects.requireNonNull(bot.getFriend(1348517163L)).sendMessage(result);
+        Objects.requireNonNull(bot.getFriend(botConfig.getWifeQQ())).sendMessage(result);
     }
 
 }
