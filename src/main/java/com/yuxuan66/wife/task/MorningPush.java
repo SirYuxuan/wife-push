@@ -14,8 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.awt.image.ConvolveOp;
-import java.util.Calendar;
+
 import java.util.Date;
 import java.util.Objects;
 
