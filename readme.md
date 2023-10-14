@@ -9,7 +9,7 @@
   <a href="https://github.com/SirYuxuan/wife-push/pulls">
     <img src="https://img.shields.io/github/issues-pr/SirYuxuan/wife-push?color=0088ff&style=for-the-badge&logo=github"  alt="SirYuxuan/拉取请求"/>
   </a>
- <a href="https://docs.yuxuan66.com/open-source/wife-push/index">
+ <a href="https://docs.yuxuan66.com/open-source/wife-push">
     <img src="https://img.shields.io/badge/YuxuanOpenSource-Docs-blue"  alt="SirYuxuan/docs"/>
   </a>
 </div>
