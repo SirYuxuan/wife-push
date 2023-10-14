@@ -1,13 +1,8 @@
 package com.yuxuan66.wife.support.config;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.date.BetweenFormatter;
-import cn.hutool.core.date.DateUtil;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.Date;
 
 /**
  * 机器人配置类
@@ -32,8 +27,8 @@ public class BotConfig {
     /**
      * 恋爱纪念日
      */
-    @Value("${push.fallingInLove}")
-    private String fallingInLove;
+    @Value("${push.loveDay}")
+    private String loveDay;
 
     /**
      * 相识的日子
@@ -54,10 +49,33 @@ public class BotConfig {
     private String obtainingACertificate;
 
     /**
+     * 结婚纪念日
+     */
+    @Value("${push.weddingAnniversary:''}")
+    private String weddingAnniversary;
+
+    /**
+     * 星座
+     */
+    @Value("${push.star:''}")
+    private String star;
+
+    /**
      * 生日
      */
     @Value("${push.birthday:''}")
     private String birthday;
 
+    /**
+     * 城市代码
+     */
+    @Value("${tianxing.cityCode:''}")
+    private String cityCode;
+
+    /**
+     * 天行的密钥
+     */
+    @Value("${tianxing.apiKey:''}")
+    private String apiKey;
 
 }

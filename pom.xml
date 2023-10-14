@@ -8,7 +8,7 @@
     <!-- 项目坐标 -->
     <groupId>com.yuxuan66</groupId>
     <artifactId>wifePush</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.2</version>
     <parent>
         <!-- Spring Boot 父项目依赖 -->
         <groupId>org.springframework.boot</groupId>

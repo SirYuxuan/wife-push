@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "tianxing.cityCode",
+      "type": "java.lang.Long",
+      "description": "Description for tianxing.cityCode."
+    },
+    {
+      "name": "tianxing.key",
+      "type": "java.lang.String",
+      "description": "Description for tianxing.key."
+    }
+  ] }

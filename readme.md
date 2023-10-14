@@ -19,7 +19,7 @@
 ## 🤔 **关于项目**
 
 - **为什么创建此项目？**
-  - 为了给老婆每天早上推送一些信息，比如天气、每日一句等等
+- 为了给老婆每天早上推送一些信息，比如天气、每日一句等等
 - 起源于小红书看到了一个同行给老婆做的微信公众号推送此类信息，觉得挺有趣就去看了看,没想到公众号都注册认证过了发现无法自定义模板了，所以采用了QQ推送的方案
 
 ---
@@ -50,23 +50,26 @@ bot:
   # 老婆的QQ
   wifeQQ: 1718018032
 push:
-  # 老婆的生日，需要写明年的日子，下次更新将修改为出生日子自动计算
+  # 老婆的生日
   birthday: 1990-01-01
-  # 恋爱纪念日
-  fallingInLove: 1990-01-01
   # 认识的日子
   acquaintance: 1990-01-01
-  # 订婚的日子
-  engagement: 1990-01-01
-  # 领证的日子，自动判断是倒计时还是统计天数
+  # 恋爱纪念日
+  loveDay: 1990-01-01
+  # 领证纪念日
   obtainingACertificate: 1990-01-01
-
+  # 结婚纪念日
+  weddingAnniversary: 1990-01-01
+  # 星座
+  star: 双鱼座
 
 # 获取彩虹屁和天气的接口Key https://www.tianapi.com/
 tianxing:
-  key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  apiKey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  # 城市编码，可以在 https://tianapi.com/apiview/239 获取
+  cityCode: 101180101
 ```
-系统会在启动推送早上/晚上的消息，早上定时为7.15，晚上为21.15，此时间在`com.yuxuan66.wife.task.MorningPush`中修改
+系统会在启动推送早上/晚上的消息，早上定时为7.15，晚上为19.15，此时间在`com.yuxuan66.wife.cron.CronConst`中修改
 
 ---
 
@@ -82,17 +85,30 @@ tianxing:
 │       │   └── com
 │       │       └── yuxuan66
 │       │           └── wife
+│       │               ├── cron
+│       │               │   └── CronConst.java
+│       │               ├── entity
+│       │               │   └── WeatherInfo.java
+│       │               ├── service
+│       │               │   ├── DayCalcService.java
+│       │               │   └── NormalService.java
 │       │               ├── support
-│       │               │   └── config
-│       │               │       └── BotConfig.java
+│       │               │   ├── config
+│       │               │   │   └── BotConfig.java
+│       │               │   └── BotCore.java
 │       │               ├── task
-│       │               │   └── MorningPush.java
+│       │               │   └── NormalPush.java
 │       │               ├── utils
-│       │               │   └── Util.java
+│       │               │   ├── TianxingApi.java
+│       │               │   └── YuxuanApi.java
 │       │               └── WifePushApp.java
 │       └── resources
-│           └── application.yml
+│           ├── META-INF
+│           │   └── additional-spring-configuration-metadata.json
+│           ├── application.yml
+│           └── banner.txt
 ├── CHANGELOG.md
+├── LICENSE
 ├── pom.xml
 └── readme.md
 
@@ -102,7 +118,7 @@ tianxing:
 
 ## 📝 **额外说明**
 
-* 如需要什么额外功能请在`com.yuxuan66.wife.task`中添加
+* 如需要什么额外功能请在`com.yuxuan66.wife.task`包下添加
 
 ---
 
@@ -120,7 +136,7 @@ tianxing:
 
 通过捐赠，您将帮助此项目的发展，并且*您将在此wife-push的README.md中显示*，以便每个人都可以看到您的善举并访问您的内容⭐。
 
-<a href="https://github.com/sponsors/SirYuxuan"> <!-- 如果您不在GitHub赞助计划中，修改此链接到您的主要捐赠网站 -->
+<a target="_blank" href="https://afdian.net/a/siryuxuan/plan"> <!-- 如果您不在GitHub赞助计划中，修改此链接到您的主要捐赠网站 -->
   <img src="https://img.shields.io/badge/Sponsor-SirYuxuan/wife push-blue?logo=github-sponsors&style=for-the-badge&color=red">
 </a>
 
@@ -134,7 +150,7 @@ wife-push从*[SirYuxuan/project-template](https://github.com/SirYuxuan/project-t
 
 ## 🕵️ 额外建议
 
-* <!-- 如果您建议安装任何特殊内容，或者如果您建议使用某种内容以便更好地使用您的项目...-->
+* 疼老婆会发达，爱老婆会发达
 
 ---
 
@@ -144,7 +160,6 @@ wife-push从*[SirYuxuan/project-template](https://github.com/SirYuxuan/project-t
 [![GitHub stars](https://img.shields.io/github/stars/SirYuxuan/wife-push.svg?style=social)](https://github.com/SirYuxuan/wife-push/stargazers)
 [![GitHub watchers](https://img.shields.io/github/watchers/SirYuxuan/wife-push.svg?style=social)](https://github.com/SirYuxuan/wife-push/watchers)
 [![GitHub forks](https://img.shields.io/github/forks/SirYuxuan/wife-push.svg?style=social)](https://github.com/SirYuxuan/wife-push/network/members)
-<!-- 如果您不在GitHub赞助计划中，修改此链接到您的主要捐赠网站 -->
 [![赞助](https://img.shields.io/static/v1?label=赞助&message=%E2%9D%A4&logo=github-sponsors&color=red&style=social)](https://afdian.net/a/siryuxuan/plan)
 
 尽情享受！ 😃
