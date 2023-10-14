@@ -21,7 +21,7 @@ jobs:
     - name: 替换yml配置文件
       run: ls
     - run: rm -rf src/main/resources/application.yml
-    - run: echo ${{ secrets.CONFIG_YML }} >> src/main/resources/application.yml
+    - run: echo "${{ secrets.DB_PASSWORD }}" >> src/main/resources/application.yml
     - run: cat src/main/resources/application.yml
     - name: Build with Maven
       run: mvn -B package --file pom.xml
