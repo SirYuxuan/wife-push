@@ -54,7 +54,7 @@ public class BotCore {
      * @param message 消息
      */
     public void push(String message){
-        Objects.requireNonNull(bot.getFriend(botConfig.getQq())).sendMessage(message);
+        Objects.requireNonNull(bot.getFriend(botConfig.getWifeQQ())).sendMessage(message);
     }
 
 
