@@ -1,0 +1,82 @@
+repository:
+# Labels: define labels for Issues and Pull Requests
+labels:
+  - name: '类型: 错误'
+    color: e80c0c
+    description: 某些功能不按预期工作。
+
+  - name: '类型: 增强'
+    color: 54b2ff
+    description: 为现有功能提出改进建议。
+
+  - name: '类型: 功能'
+    color: 54b2ff
+    description: 提出新功能建议。
+
+  - name: '类型: 安全'
+    color: fbff00
+    description: 与安全问题相关的问题或增强。
+
+  - name: '类型: 问题'
+    color: 9309ab
+    description: 请求获取信息。
+
+  - name: '类型: 测试'
+    color: ce54e3
+    description: 与测试相关的问题或增强。
+
+  - name: '状态: 等待审核'
+    color: 24d15d
+    description: 准备好进行审核。
+
+  - name: '状态: 进行中'
+    color: 07b340
+    description: 目前正在处理中。
+
+  - name: '状态: 等待'
+    color: 38C968
+    description: 正在等待其他事情准备就绪。
+
+  - name: '状态: 荒废'
+    color: 66b38a
+    description: 一段时间内没有任何活动。
+
+  - name: '重复'
+    color: EB862D
+    description: 是另一个问题的重复。
+
+  - name: '无效'
+    color: faef50
+    description: 此问题似乎不正确。
+
+  - name: '优先级: 高 +'
+    color: ff008c
+    description: 任务被视为优先级较高。
+
+  - name: '优先级: 低 -'
+    color: 690a34
+    description: 任务被视为优先级较低。
+
+  - name: '文档'
+    color: 2fbceb
+    description: 文档中的问题/更改。
+
+  - name: "不会修复"
+    color: C8D9E6
+    description: 报告的问题按预期工作。
+
+  - name: '第三方问题'
+    color: e88707
+    description: 此问题可能由第三方脚本/包/其他原因引起。
+
+  - name: '操作系统: Windows'
+    color: AEB1C2
+    description: 与 Windows 特定。
+
+  - name: '操作系统: Mac'
+    color: AEB1C2
+    description: 与 Mac 特定。
+
+  - name: '操作系统: Linux'
+    color: AEB1C2
+    description: 与 Linux 特定。

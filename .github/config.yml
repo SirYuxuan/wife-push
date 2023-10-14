@@ -1,0 +1,18 @@
+# Configuration for new-issue-welcome - https://github.com/behaviorbot/new-issue-welcome
+
+# 首次发布时的评论
+newIssueWelcomeComment: >
+    感谢您在 SirYuxuan/project-template 中打开第一个问题！请务必遵循问题模板并提供每一点信息以帮助开发人员！
+  
+# new-pr-welcome 的配置 - https://github.com/behaviorbot/new-pr-welcome
+# 在您的版本库中，首次贡献者的 PR 上要发布的评论
+newPRWelcomeComment: >
+    感谢您开启此拉取请求！请查看我们的贡献指南，并确保遵循拉取请求模板。
+  
+# First-pr-merge 的配置 - https://github.com/behaviorbot/first-pr-merge
+# 对首次用户合并的拉取请求发表的评论
+firstPRMergeComment: >
+    恭喜你合并了第一个拉取请求！继续和我们一起创造伟大的东西，谢谢！！
+    
+    todo：
+keyword: '@todo'

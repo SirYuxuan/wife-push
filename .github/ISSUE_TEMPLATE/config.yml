@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 向开发者发送电子邮件
+    url: mailto:1718018032@qq.com
+    about: 请不要使用此电子邮件发布问题或功能请求（仅限重要商务/个人联系）。

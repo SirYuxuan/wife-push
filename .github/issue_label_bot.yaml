@@ -1,0 +1,4 @@
+label-alias:
+    bug: '类型: Bug'
+    feature_request: '类型: 功能'
+    question: '类型: 问题'
