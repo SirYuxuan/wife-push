@@ -25,17 +25,17 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: scp ssh pipelines
-        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
-        env:
-          LASTSSH: "Doing something after copying"
-        with:
-          host: ${{ secrets.YUXUAN_MAIN_SERVER_IP }}
-          user: ${{ secrets.YUXUAN_MAIN_SERVER_USER }}
-          pass: ${{ secrets.YUXUAN_MAIN_SERVER_PASS }}
-          scp: |
-            ./target/wifePush.jar => /mnt/project/java/wifePush
-          last_ssh: |
-            echo $LASTSSH 
-            cd /mnt/project/java/wifePush
-            sh ./shell.sh
+      uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+      env:
+        LASTSSH: "Doing something after copying"
+      with:
+        host: ${{ secrets.YUXUAN_MAIN_SERVER_IP }}
+        user: ${{ secrets.YUXUAN_MAIN_SERVER_USER }}
+        pass: ${{ secrets.YUXUAN_MAIN_SERVER_PASS }}
+        scp: |
+          ./target/wifePush.jar => /mnt/project/java/wifePush
+        last_ssh: |
+          echo $LASTSSH 
+          cd /mnt/project/java/wifePush
+          sh ./shell.sh
     
