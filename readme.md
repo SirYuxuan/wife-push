@@ -2,6 +2,9 @@
 # 🔥 **SirYuxuan/wife-push**
 
 <div align="center">
+    <a href="[https://github.com/Josee9988/project-template/generate](https://github.com/SirYuxuan/wife-push)">
+    <img width="100%" src="https://cdn.yuxuan66.com/openSource/logo.png" >
+  </a>
   <br>
   <a href="https://github.com/SirYuxuan/wife-push/issues">
     <img src="https://img.shields.io/github/issues/SirYuxuan/wife-push?color=0088ff&style=for-the-badge&logo=github" alt="SirYuxuan/问题"/>
